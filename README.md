@@ -4,6 +4,6 @@
 - ReactJs
 - bootswatch
 ## Installation
-- Clone the repository: git clone https://github.com/amouchaldev/react-todo-list.git
+- Clone the repository: git clone https://github.com/amouchaldev/ReactJs-Todo-List.git
 - Install dependencies: npm install
 - Start the development server: npm run dev
