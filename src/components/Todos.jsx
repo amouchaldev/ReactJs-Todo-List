@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import TodoContext from "../contexts/TodoContext";
 import Todo from "../components/Todo";
@@ -6,7 +6,7 @@ import Todo from "../components/Todo";
 const Todos = () => {
   const { segment } = useParams();
   const { todos } = useContext(TodoContext);
-
+console.log('my route: ', segment)
   // get all todos if segment is undefined
   if (!segment) return todos.map(todo => <Todo key={todo.id} todo={todo} />);
   // get only completed todos

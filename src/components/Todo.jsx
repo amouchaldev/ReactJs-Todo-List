@@ -41,11 +41,13 @@ const Todo = ({ todo: { id, description, completed, createdAt } }) => {
           ? `completed ${formatDistanceToNow(completed)} ago`
           : `created ${formatDistanceToNow(createdAt)} ago`}
       </small>
+      {/* edit icon */}
       <AiOutlineEdit
         className="action opacity-0"
         role="button"
         onClick={() => switchAddToUpdate(id, description)}
       />
+    {/* delete icon */}
       <AiOutlineDelete
         className="action opacity-0"
         role="button"

@@ -7,6 +7,7 @@ const Form = () => {
     addTodo,
     updateTodo,
     btnState: { type, slot },
+    cancelUpdate
   } = useContext(TodoContext);
   return (
     <form
@@ -17,7 +18,7 @@ const Form = () => {
           ? addTodo(e, descriptionInput.current.value)
           : updateTodo(e, descriptionInput.current.value);
       }}
-    >
+      >
       <div className="form-outline flex-fill">
         <input
           type="text"
@@ -27,6 +28,9 @@ const Form = () => {
         />
       </div>
       <Button type={type}>{slot}</Button>
+      {
+      type == 'success' && <Button type='dark' onclickFn={cancelUpdate}>Cancel</Button>
+      }
     </form>
   );
 };
