@@ -6,7 +6,7 @@ const Form = () => {
     descriptionInput,
     addTodo,
     updateTodo,
-    btnState: { type, slot },
+    btnState: { type, slot, todoID = null },
     cancelUpdate
   } = useContext(TodoContext);
   return (
@@ -16,7 +16,7 @@ const Form = () => {
         // info refers to add todo function and success refers to update todo function
         type == "info"
           ? addTodo(e, descriptionInput.current.value)
-          : updateTodo(e, descriptionInput.current.value);
+          : updateTodo(e, todoID, descriptionInput.current.value);
       }}
       >
       <div className="form-outline flex-fill">

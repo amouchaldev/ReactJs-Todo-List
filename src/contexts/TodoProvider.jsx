@@ -93,7 +93,7 @@ const TodoProvider = ({ children }) => {
     });
   };
   // function take in parameter event and new value
-  function updateTodo(e, newDescription) {
+  function updateTodo(e, todoId,  newDescription) {
     e.preventDefault();
     // prevent user from adding empty string
     if (newDescription.trim() == "") {
@@ -104,11 +104,9 @@ const TodoProvider = ({ children }) => {
         confirmButtonColor: "#56cc9d",
       });
     } else {
-      // get todo id from local storage
-      const todoID = localStorage.getItem("todoID");
       // create new list of todos and change specific todo
       const updateMyTodo = todos.map((todo) => {
-        if (todo.id == todoID) {
+        if (todo.id == todoId) {
           return {
             ...todo,
             description: newDescription,
@@ -119,8 +117,6 @@ const TodoProvider = ({ children }) => {
       setTodos(updateMyTodo);
       // reset input after updating todo
       e.target.reset();
-      // remove todo id from local storage
-      localStorage.removeItem("todoID");
       // reset button state to add state
       setBtnState({
         type: "info",
@@ -131,22 +127,22 @@ const TodoProvider = ({ children }) => {
   }
   // function that change form from add todo to update todo
   function switchAddToUpdate(todoID, description) {
-    if (btnState.type == "success") {
+    descriptionInput.current.value = description;
+    setBtnState({
+      type: "success",
+      slot: "Update",
+      todoID
+    });
+  }
+
+  function cancelUpdate(e) {
+    e.preventDefault()
       descriptionInput.current.value = "";
       setBtnState({
         type: "info",
         slot: "Add",
       });
-      return;
-    }
-    localStorage.setItem("todoID", todoID);
-    descriptionInput.current.value = description;
-    setBtnState({
-      type: "success",
-      slot: "Update",
-    });
   }
-
   return (
     <TodoContext.Provider
       value={{
@@ -158,6 +154,7 @@ const TodoProvider = ({ children }) => {
         descriptionInput,
         btnState,
         switchAddToUpdate,
+        cancelUpdate
       }}
     >
       {children}
